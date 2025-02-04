@@ -1,6 +1,7 @@
 package org.example.springsecurityhandmade.model;
 
 import org.springframework.security.core.GrantedAuthority;
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,16 +29,12 @@ public class UserPrinciple implements UserDetails {
         this.roles = roles;
     }
 
-    public static UserPrinciple build(AppUser user) {
+    public static UserPrinciple build(AppUser user){
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (AppRole a : user.getRoles()) {
+        for (AppRole a : user.getRoll()) {
             authorities.add(new SimpleGrantedAuthority(a.getName()));
         }
         return new UserPrinciple(user.getId(), user.getUsername(), user.getPassword(), authorities);
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override

@@ -1,11 +1,17 @@
 package org.example.springsecurityhandmade.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.DialectOverride;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+import java.util.Set;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -15,4 +21,8 @@ public class AppUser {
     private String username;
     @Column(nullable = false)
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<AppRole> roll;
+
 }
